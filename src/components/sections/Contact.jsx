@@ -5,21 +5,21 @@ import emailjs from "emailjs-com";
 export const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "", 
+    email: "",
     message: "",
   });
 
-  const SERVICE_ID = "service_nfsh648";
-  const TEMPLATE_ID = "template_rgvllry";
-  const PUBLIC_KEY = "aFA-80CNynUcDIGuq";
-
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     emailjs
-      .sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY)
+      .sendForm(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        e.target,
+        import.meta.env.VITE_PUBLIC_KEY
+      )
       .then((result) => {
-        alert("Message sent");
         setFormData({
           name: "",
           email: "",
@@ -39,7 +39,7 @@ export const Contact = () => {
           <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-blue-200 bg-clip-text text-transparent">
             Get in touch
           </h2>
-          <form className="space-y-6" action="" onSubmit={handleSubmit()}>
+          <form className="space-y-6" action="" onSubmit={handleSubmit}>
             {/* Name input */}
             <div className="relative">
               <input
